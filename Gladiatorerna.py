@@ -1,9 +1,29 @@
+from pickle import FALSE
 import random
 import time
 import os
 from colorama import Fore, Style
+from playsound3 import playsound
 is_player_alive = True
 gore = False
+load = 0
+def clear_screen():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+
+
+
+for i in range(100):
+    print(f"Loading ({load}%)")
+    load += 1
+    time.sleep(0.05)
+    clear_screen()
+
+
+sound = playsound("C:/Gladiatorerna/Meny.mp4", block=False)
+
 print("")
 print(Fore.RED + Style.BRIGHT + "BLOOD AND HONOR\n")
 menu_choice = 0
@@ -21,11 +41,7 @@ spelare_hälsopoäng = 10
 fiende_hälsopoäng = 10
 vapen_skada = 3
 spelare_vapen = vapen_skada
-def clear_screen():
-    if os.name == 'nt':
-        os.system('cls')
-    else:
-        os.system('clear')
+
 
 vapen_träffchans = None
 
@@ -33,42 +49,59 @@ träffar = False
 
 omtyckt = 0
 
+vunna_fighter = 0
 
-        
 
 
     
 
 
-#Så länge som spelaren inte klickat på 4 för att börja spela, så är menyn igång
-while menu_choice != ("4"):
+#Så länge som spelaren inte klickat på 5 för att börja spela, så är menyn igång
+while menu_choice != ("5"):
     print(Fore.RESET + Style.BRIGHT + "===============================================================================================================================")
     print(Style.BRIGHT + Fore.WHITE + "Spelmeny\n" + Style.RESET_ALL + Fore.RED + "Gore        " + Fore.GREEN +"Välj Gladiator   "  + Fore.YELLOW + "Svårighetsgrad\n")
     menu_choice = input(Fore.RESET + "Klicka 1 för att sätta på eller av Gore(Blodiga effekter)\n" 
-    "Klicka 2 för att välja svårighetsgrad \nKlicka 3 för att välja karaktär \nKlicka 4 för att börja spela\nOBS! VÄLJ KARAKTÄR INNAN DU BÖRJAR\n:")
+    "Klicka 2 för att välja svårighetsgrad \nKlicka 3 för att välja karaktär \nKlicka 4 för att börja spela\n:")
     if menu_choice == ("1"):
+        sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+        time.sleep(0.7)
         gore_choice = input(f"Gore är på {gore}.\nVill du ha gore (På) eller (Av)?")
-        if gore_choice == ("På"):
+        if gore_choice == ("På") or gore_choice == ("på") or gore_choice == ("ja"):
+            sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+            time.sleep(0.7)
             gore = True
             print("Gore är nu (På).")
         else:
+            sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+            time.sleep(0.7)
             gore = False
             print("Gore är nu (Av).")
             print(" ")
         input("Tryck valfri tangent för att komma tillbaka till menyn...\n")
+
     if menu_choice == ("2"):
+        sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+        time.sleep(0.7)
         print("Svårighetsgraderna är (lätt), (medel), (expert).")
         svårighet = input("Vilken svårighet vill du ha?")
         if svårighet == ("lätt"):
+            sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+            time.sleep(0.7)
             svårighet = (1)
             print("Svårighetsgraden är nu på lätt")
         elif svårighet == ("medel"):
+            sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+            time.sleep(0.7)
             svårighet = (2)
             print("Svårighetsgraden är nu på medel")
         elif svårighet == ("expert"):
+            sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+            time.sleep(0.7)
             svårighet = (3)
             print("Svårighetsgraden är nu på expert")
         else:
+            sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+            time.sleep(0.7)
             if times == (0):
                 print("Don't mess with the system! Du får lätt, vill du ha en annan så får du göra om det.")
                 svårighet = (1)
@@ -87,19 +120,27 @@ while menu_choice != ("4"):
     
     
     if menu_choice == ("3"):
+        sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+        time.sleep(0.7)
         kön_val = input("Vill du vara man eller kvinna?")
+        sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+        time.sleep(0.7)
         if kön_val == "man":
             print("Välj en av följande gladiatorer:")
             print("1. Bobius Bobiusson\nEn vildman i 20 års åldern, tagen som slav från den nordesta toppen av romarriket, är fylld av hat och ilska,\n" \
             "redo att ta ut den på alla som kommer i hans väg...")
             print("Egenskaper:\n" + Fore.GREEN + "+ Är skicklig med yxor\n+ Går in i berserkagång ibland och gör mer skada\n" + Fore.RED + "- Kan i sin berserkagång råka skada sig själv\n\n" + Fore.RESET)
+
             print("2. Maximus Decimus Meridius\nEn äldre romersk general som blivit förråd och fått sin familj mördad. " \
             "Han är redo att ge igen mot allt och alla som förstört honom.")
             print("Egenskaper:\n" + Fore.GREEN + "+ Är skicklig med kortsvärd\n+ Ger ibland iväg ett vrål, som sänker fiendens moral, som sänker deras träffchans\n" + Fore.RED + "- På grund av sin ålder, är långsammare och gör mindre skada.\n\n" + Fore.RESET)
-            gladiator = int(input("Välj din gladiator(1 eller 2)"))
-            if gladiator == (1):
+            gladiator = (input("Välj din gladiator(1 eller 2)"))
+            sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+            time.sleep(0.7)
+
+            if gladiator == "1":
                 gladiator = ("Bobius Bobiusson")
-            elif gladiator == (2):
+            elif gladiator == "2":
                 gladiator = ("Maximus Decimus Meridius")
             else:
                 print("Det var inte ett val, du får Bobius Bobsson. Gör om detta ifall du vill ha en annan.")
@@ -113,18 +154,23 @@ while menu_choice != ("4"):
         elif kön_val == "kvinna":
             print("3. Berlinda Bobsson\nEn soldatkvinna från söder, tagen som slav är farlig med kroksablar, och förbluffar fiender med hennes snabbhet.\nHon är fast besluten att ta sig hem till södern.")
             print("Egenskaper:\n" + Fore.GREEN + "+ Är skicklig med kroksablar\n+ Är väldigt snabb, har ökad träffchans\n" + Fore.RED + "- Gör mindre skada på grund av gammal skada\n\n" + Fore.RESET)
+
             print("4. Emilia Neosdotter\nEn tjuv som tillsluts tagits efter flera år av stölder och terrorisering.\nEmilia är väldigt gymnastisk och farlig på grund av hennes kunnighet inom stridskonst.")
             print("Egenskaper:\n" + Fore.GREEN + "+ Är skickligast utan vapen\n+ Är väldigt kvick, och är svårare att träffa\n" + Fore.RED + "- Gör mindre skada på grund av svaghet\n\n" + Fore.RESET)
-            gladiator = int(input("Välj din gladiator(3 eller 4)"))
-            if gladiator == (3):
+            gladiator = (input("Välj din gladiator(3 eller 4)"))
+            sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+            time.sleep(0.7)
+
+            if gladiator == "3":
                 gladiator = ("Berlinda Bobsson")
-            elif gladiator == (4):
+            elif gladiator == "4":
                 gladiator = ("Emilia Neosdotter")
             else:
                 print("Det var inte ett val, du får Berlinda Bobsson. Gör om detta ifall du vill ha en annan.")
                 gladiator = ("Berlinda Bobsson")
 
             print(f"Du har just nu valt {gladiator} som din gladiator.")
+
             if gladiator == ("Berlinda Bobsson"):
                 gladiator = (3)
             elif gladiator == ("Emilia Neosdotter"):
@@ -134,21 +180,54 @@ while menu_choice != ("4"):
         print(" ")
         input("Tryck valfri tangent för att komma tillbaka till menyn...\n")
 
+    if menu_choice == "4":
+        print("Vill du ha på musik? (På) eller (Av)")
+        musik = input(":")
+        if musik == "På" or musik == "på" or musik == "PÅ" or musik == "Ja" or musik == "ja" or musik == "JA":
+            print("Musik är nu av.")
+            musik = False
+        else:
+            print("Musik är nu på.")
+            musik = True
+        print(" ")
+        input("Tryck valfri tangent för att komma tillbaka till menyn...\n")
+        
+    
+    if menu_choice == "5":
+        sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+        time.sleep(0.7)
+        load = 0
+        for i in range(100):
+            print(f"Loading ({load}%)")
+            load += 1
+            time.sleep(0.05)
+            clear_screen()
+        
+
     clear_screen()
         
 #################################################################################################################################
+
+sound.stop()
+
+
+#Här ställs hälsan för spelare, fiende och grund skada hos vapen in beroende på vilken svårighet man valde, 
+#man får dessutom ett extra omtyckthets poäng om man valde expert, och man får ett extra poäng om man är namnlös, alltså inte valde någon gladiator.
+#Här ställs det dessutom in hur många fighter man behöver vinna för att få sin frihet.
 if svårighet == (1):
     spelare_hälsopoäng = 15
     fiende_hälsopoäng = 10
     vapen_skada = 3
     tiger_skada = 2
     drake_skada = 3
+
 elif svårighet == (2):
     spelare_hälsopoäng = 10
     fiende_hälsopoäng = 10
     vapen_skada = 2
     tiger_skada = 3
     drake_skada = 4
+
 elif svårighet == (3):
     spelare_hälsopoäng = 10
     fiende_hälsopoäng = 15
@@ -157,7 +236,7 @@ elif svårighet == (3):
     drake_skada = 5
     omtyckt += 1
 
-
+#De olika vapnen som finns i spelet, här konfigueras deras skada utifrån svårigheten, plus deras grund skada.
 Händer = (vapen_skada)
 Kortsvärd = 1 + (vapen_skada)
 Yxor = 2 + (vapen_skada)
@@ -165,13 +244,17 @@ Kroksabel = 3 + (vapen_skada)
 Spjut = 4 + (vapen_skada)
 Pilbåge = 3 + (vapen_skada)
 
-
-def affären(romdaler):
-    global vapen
+#Här är definitionen av funktionen "Affären", efter varje fight så får man "romdaler", som är valutan i detta spelet. Och efter varje fight så kommer man hit, för att köpa något.
+def affären():
+    clear_screen()
+    global vapen, romdaler, sound_3, sound_2, sound_4, is_player_alive, musik
     global spelare_vapen, vapen_attack
     global Kortsvärd, Yxor, Kroksabel, Spjut
-    marknaden = 1
-    while marknaden == (1):
+    marknaden = "2"
+    sound_3 = playsound("C:/Gladiatorerna/Affären.mp4", block=False)
+    if musik == True:
+        sound_4 = playsound("C:/Gladiatorerna/Affärmusik.mp4", block=False)
+    while marknaden != "1":
         köp = "Nej"
         val = None
         print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
@@ -188,6 +271,7 @@ def affären(romdaler):
                 print("1. Köp Kortsvärd (" + Fore.GREEN + "20" + Fore.RESET + ")?")
                 köp = input("(ja) eller (nej):")
                 if köp == "ja":
+                    sound_2 = playsound("C:/Gladiatorerna/Köpnågot.mp4", block=False)
                     romdaler -= 20
                     vapen = "ett kortsvärd"
                     spelare_vapen = 0
@@ -204,6 +288,7 @@ def affären(romdaler):
                     print("Du har inte tillräckligt med pengar...")
                 else:
                     print("Okej :(")
+
         elif val == "2" or val == "yxor" or val == "Yxor":
             if vapen == "dina yxor":
                 print("2. Köp Yxor (Du har redan detta vapnet)")
@@ -211,6 +296,7 @@ def affären(romdaler):
                 print("2. Köp Yxor (" + Fore.GREEN + "30" + Fore.RESET + ")?")
                 köp = input("(ja) eller (nej):")
                 if köp == "ja":
+                    sound_2 = playsound("C:/Gladiatorerna/Köpnågot.mp4", block=False)
                     romdaler -= 30
                     vapen = "dina yxor"
                     spelare_vapen = 0
@@ -227,6 +313,7 @@ def affären(romdaler):
                     print("Du har inte tillräckligt med pengar...")
                 else:
                     print("Okej :(")
+
         elif val == "3" or val == "kroksabel" or val == "Kroksabel":
             if vapen == "en kroksabel":
                 print("3. Köp Kroksabel (Du har redan detta vapnet)")
@@ -234,6 +321,7 @@ def affären(romdaler):
                 print("3. Köp Kroksabel (" + Fore.GREEN + "40" + Fore.RESET + ")?")
                 köp = input("(ja) eller (nej):")
                 if köp == "ja":
+                    sound_2 = playsound("C:/Gladiatorerna/Köpnågot.mp4", block=False)
                     romdaler -= 40
                     vapen = "en kroksabel"
                     spelare_vapen = 0
@@ -249,6 +337,7 @@ def affären(romdaler):
                     print("Du har inte tillräckligt med pengar...")
                 else:
                     print("Okej :(")
+
         elif val == "4" or val == "spjut" or val == "Spjut":
             if vapen == "ett spjut":
                 print("4. Köp Spjut (Du har redan detta vapnet)")
@@ -256,6 +345,7 @@ def affären(romdaler):
                 print("4. Köp Spjut (" + Fore.GREEN + "50" + Fore.RESET + ")?")
                 köp = input("(ja) eller (nej):")
                 if köp == "ja":
+                    sound_2 = playsound("C:/Gladiatorerna/Köpnågot.mp4", block=False)
                     romdaler -= 50
                     vapen = "ett spjut"
                     spelare_vapen = 0
@@ -272,18 +362,25 @@ def affären(romdaler):
                     print("Du har inte tillräckligt med pengar...")
                 else:
                     print("Okej :(")
+        
+        elif val == "porr" or val == "Porr" or val == "droger" or val == "drogas" or val == "människor" or val == "din mamma" or val == "mami" or val == "papi" or val == "dih" or val == "strap-on":
+            is_player_alive = False
+            print("Butiksvärden blir förolämpad av ditt svar och slår ihjäl dig. Vilken lättkränkt man.")
+            break
+
     
-        marknaden = int(input("Om du vill lämna marknaden tryck (2), om du vill fortsätta tryck (1)"))
+        marknaden = (input("Om du vill lämna marknaden tryck (1), om du vill fortsätta tryck (2)"))
         print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
     clear_screen()
-    return romdaler
+    sound_4.stop()
+
 #################################
-vapen_attack = "Spjut"          #
+vapen_attack = "Spjut"          #     Vilket vapen man börjar med.
 spelare_vapen = Spjut           #
 #################################
 
 
-
+#Träffchansen som skrivs ut inom while-loopen när det är fight
 if vapen_attack == "Kortsvärd":
     vapen_träffchans = "(Träffchans(6/10))"
 elif vapen_attack == "Yxor":
@@ -294,72 +391,92 @@ elif vapen_attack == "Spjut":
     vapen_träffchans = "(Träffchans(2/10))"
 
 
-
+#Funktionen som kollar vilket vapen du har, räknar ut en random int, och kollar om du träffar
 def träff():
-    global vapen_träffchans, vapen_attack, träffar, fiende_hälsopoäng
+    global vapen_träffchans, vapen_attack, träffar, fiende_hälsopoäng, vunna_fighter
     odds = 0
+
     if vapen_attack == "Kortsvärd":
         odds = random.randint(1, 10)
+
         if odds == 1 or odds == 3 or odds == 5 or odds == 7 or odds == 9 or odds == 10:
             träffar = True
+
             if gore == True:
                 print("Du träffar din fiende med kortsvärdet, och det skär djupt in i fiendens mage, där blod sprutar och du ser din fiendes\n magsäck, och magsyran rinner ut i din fiendes kropp och fräter.")
                 fiende_hälsopoäng -= spelare_vapen
+
             elif gore == False:
                 print("Du träffar din fiende och fienden skriker till av smärta.")
                 fiende_hälsopoäng -= spelare_vapen
+
         else:
             träffar = False
             print("Du missar din fiende.")
+
     elif vapen_attack == "Yxor":
         odds = random.randint(1, 2)
+
         if odds == 1:
             träffar = True
+
             if gore == True:
                 print("Du träffar din fiende med yxorna, och de sjunker djupt in i fiendens bröst, där blod sprutar och du ser en av din fiendes\n punkterade lungor, som kämpar att få in luft.")
                 fiende_hälsopoäng -= spelare_vapen
+
             elif gore == False:
                 print("Du träffar din fiende och fienden skriker till av smärta.")
                 fiende_hälsopoäng -= spelare_vapen
+
         else:
             träffar = False
             print("Du missar din fiende.")
+
     elif vapen_attack == "Kroksabel":
         odds = random.randint(1, 10)
+
         if odds == 1 or odds == 3 or odds == 7 or odds == 9:
             träffar = True
+
             if gore == True:
                 print("Du träffar din fiende med kroksabeln, och det skär över halsen på din fiende.\nDet bildas snabbt en blodpöl och din fiende tappar medvetandet, men vaknar sedan snabbt upp för att slåss.")
                 fiende_hälsopoäng -= spelare_vapen
+
             elif gore == False:
                 print("Du träffar din fiende och fienden skriker till av smärta.")
                 fiende_hälsopoäng -= spelare_vapen
+
         else:
             träffar = False
             print("Du missar din fiende.")
+
     elif vapen_attack == "Spjut":
         odds = random.randint(1, 5)
+
         if odds == 1 or odds == 3:
             träffar = True
+
             if gore == True:
                 print("Du träffar din fiende med spjutet, och du spetsar din fiende som en flagga. Blodet regnar ner på dig och din fiendes inälvor flyter ut på marken.\nFörvånadsvärt nog så hoppas fienden av ditt spjut och gör sig redo att anfalla.")
                 fiende_hälsopoäng -= spelare_vapen
+
             elif gore == False:
                 print("Du träffar din fiende och fienden skriker till av smärta.")
                 fiende_hälsopoäng -= spelare_vapen
+
         else:
             träffar = False
             print("Du missar din fiende.")
 
 
-
+#Här bestäms det inför varje fight vilken motståndare man möter, om det är en gladiatior isåfall vilket vapen, och om kejsaren är där eller inte.
 print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
 fienden = random.choice(fiende)
 kejsaren = random.choice(kejsaren_närvarande)
 if fienden == "Gladiator":
     gladiatorns_vapen_för_striden = random.choice(gladiatorns_vapen)
 
-
+#Här beräknas det om ai:n får in en träff på spelaren, beroende på vilken fiende det är och vilket vapen den använder
 def ai():
     global fienden, gladiatorns_vapen_för_striden, spelare_hälsopoäng, vapen_skada, spelare_vapen
     if fienden == "Gladiator":
@@ -367,7 +484,7 @@ def ai():
             if gladiatorns_vapen_för_striden == "ett Kortsvärd":
                 ai_träffar = random.randint(1, 10)
                 if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 5 or ai_träffar == 7 or ai_träffar == 9 or ai_träffar == 10:
-                    if gore == True:
+                    if gore == True: #Här kollar systemet om och om igen vilken beskrivning den ska ge beroende på statusen av Gore inställningen
                         print("Du blir träffad av din fiende och blodet börjar rinna från din mun. Du samlar dig för att slå tillbaka.")
                         spelare_hälsopoäng -= Kortsvärd
                     else:
@@ -498,6 +615,7 @@ def ai():
                         spelare_hälsopoäng -= Pilbåge
                 else:
                     print("Du duckar för pilen och din fiende tittar på dig förskräckt medan han försöker ta fram en ny pil.\nDu närmar dig för att anfalla.")
+                    #Här kollar systemet om fienden är en tiger, och isåfall om den ska träffa spelaren
     elif fienden == "Tiger":
         ai_träffar = random.randint(1, 4)
         if ai_träffar == 1 or ai_träffar == 4:
@@ -506,8 +624,10 @@ def ai():
                 spelare_hälsopoäng -= tiger_skada
             else:
                 print("Du blir träffad av tigerns klor, du faller bak men gör dig redo att anfalla.")
+
         else:
             print("Du undvek tigern och närmar dig besten för att attackera.")
+          #Under fighten så finns det en liten chans att en drake kommer och invaderar
     elif fienden == "Drake":
         ai_träffar = random.randint(1,10)
         if ai_träffar == 1:
@@ -519,22 +639,23 @@ def ai():
                 print("Draken andas ut eld på dig och du börjar brinna, du skriker av smärta och ditt vapen går sönder.")
                 spelare_hälsopoäng -= drake_skada
                 spelare_vapen = Händer
+
         else:
             print("Du undvek drakens eld och går nära för att anfalla.")
         
             
         
-
+#Här är den allra första fighten, därför är det en annorlunda text, man möter inte en stor drake eller tiger sin första match, och kejsaren är inte närvarande för att man är okänd.
 print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
 print("Du går in i mäktiga Coloseum för första gången, och publiken iaktar dig misstänksamt, de känner inte igen dig.\nKejsaren är inte närvarande, och framför dig så ser du din första fiende, en gladiator.")
 print(f"Dina trasor till kläder fläktar i vinden, och {vapen} är vid din sida. Du och din motståndare är redo att slåss.")
 print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
-#sätt in fight här
+#sätt in anpassad fight här
     
 
 print("")
 
-    
+#Här börjar den riktiga fighten
 print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
 fienden = random.choice(fiende)
 kejsaren = random.choice(kejsaren_närvarande)
@@ -549,7 +670,7 @@ else:
 print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
 
 
-
+#Här är funktionen för hur röstsystemet fungerar, alltså vad som händer om fighten tar för lång tid, och beroende på om kejsaren är där eller inte, och vissa utfall av vad han gör när han är där, så händer olika saker:)
 def röstsystem():
     global omtyckt, is_player_alive
     ute_ur_spelet = 0
@@ -568,43 +689,148 @@ def röstsystem():
         händer_nåt = random.randint(1, 3)
         if händer_nåt == 2:
             vad_händer = random.choice(kejsaren_händelser)
-            if vad_händer == "Mutad":
-                ...########################################################
-        
-        print("Kejsaren sticker ut sin hand för att bestämma om du får vara kvar eller inte...")
+            if vad_händer == "Mutad":    #Här börjar händelsen för om kejsaren blir mutad av en affärsman
+                print("Du ser en känd affärsman gå fram till kejsaren och ge honom någonting...")
+                print("Kejsaren har blivit mutad! Din chans att bli utröstad har nu ökat med 50%!")
+                print("")
+                print("Kejsaren sticker ut sin hand för att bestämma om du får vara kvar eller inte...")
+                time.sleep(5)
 
-        time.sleep(5)
-        if chans == "75%":
-            ute_ur_spelet = random.randint(1,100)
-            if ute_ur_spelet < 76:
-                print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.\nDu vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner\n är publiken som jublar åt din fiende.")
-                is_player_alive = False
-            else:
-                print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
-        elif chans == "50%":
-            ute_ur_spelet = random.randint(1,100)
-            if ute_ur_spelet < 51:
-                print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.\nDu vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner\n är publiken som jublar åt din fiende.")
-                is_player_alive = False
-            else:
-                print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
-        elif chans == "25%":
-            ute_ur_spelet = random.randint(1,100)
-            if ute_ur_spelet < 26:
-                print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.\nDu vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner\n är publiken som jublar åt din fiende.")
-                is_player_alive = False
-            else:
-                print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
-        elif chans == "10%":
-            ute_ur_spelet = random.randint(1,100)
-            if ute_ur_spelet < 11:
-                print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.\nDu vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner\n är publiken som jublar åt din fiende.")
-                is_player_alive = False
-            else:
-                print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+                if chans == "75%":
+                    ute_ur_spelet = random.randint(1,100)
+                    if ute_ur_spelet < 126:
+                        print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+                        print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som jublar åt din fiende.")
+                        is_player_alive = False
+                        
+                    else:
+                        print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+
+                elif chans == "50%":
+                    ute_ur_spelet = random.randint(1,100)
+                    if ute_ur_spelet < 101:
+                        print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+                        print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som jublar åt din fiende.")
+                        is_player_alive = False
+
+                    else:
+                        print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+
+                elif chans == "25%":
+                    ute_ur_spelet = random.randint(1,100)
+                    if ute_ur_spelet < 76:
+                        print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+                        print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som jublar åt din fiende.")
+                        is_player_alive = False
+
+                    else:
+                        print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+
+                elif chans == "10%":
+                    ute_ur_spelet = random.randint(1,100)
+                    if ute_ur_spelet < 61:
+                        print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+                        print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som jublar åt din fiende.")
+                        is_player_alive = False
+
+                    else:
+                        print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+                                 #Här börjar den versionen av kejsaren där kejsaren inte bryr sig om publiken och röstar för den som han tyckte var den bästa
+            elif vad_händer == "Struntar":
+                print("Kejsaren verkar inte bry sig om vad publiken tycker, och kommer göra som han tycker!")
+                print("Det kan vara vad som helst!")
+
+                if chans == "75%":
+                    ute_ur_spelet = random.randint(1,100)
+                    if ute_ur_spelet < 101:
+                        print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+                        print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som jublar åt din fiende.")
+                        is_player_alive = False
+
+                    else:
+                        print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+
+                elif chans == "50%":
+                    ute_ur_spelet = random.randint(1,100)
+                    if ute_ur_spelet < 76:
+                        print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+                        print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som jublar åt din fiende.")
+                        is_player_alive = False
+
+                    else:
+                        print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+
+                elif chans == "25%":
+                    ute_ur_spelet = random.randint(1,100)
+                    if ute_ur_spelet < 51:
+                        print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+                        print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som är tysta, de gillade dig.")
+                        is_player_alive = False
+
+                    else:
+                        print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+
+                elif chans == "10%":
+                    ute_ur_spelet = random.randint(1,100)
+                    if ute_ur_spelet < 26:
+                        print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+                        print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som buar åt kejsaren.")
+                        is_player_alive = False
+
+                    else:
+                        print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+
+                   
+         #Här börjar den rättvisa versionen där kejsaren inte är mutad och faktiskt lyssnar på publiken.
+        else:
+            print("Kejsaren sticker ut sin hand för att bestämma om du får vara kvar eller inte...")
+
+            time.sleep(5)
+            if chans == "75%":
+                ute_ur_spelet = random.randint(1,100)
+                if ute_ur_spelet < 76:
+                    print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+                    print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som jublar åt din fiende.")
+                    is_player_alive = False
+
+                else:
+                    print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+
+            elif chans == "50%":
+                ute_ur_spelet = random.randint(1,100)
+                if ute_ur_spelet < 51:
+                    print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+                    print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som jublar åt din fiende.")
+                    is_player_alive = False
+
+                else:
+                    print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+
+            elif chans == "25%":
+                ute_ur_spelet = random.randint(1,100)
+                if ute_ur_spelet < 26:
+                    print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+                    print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som jublar åt din fiende.")
+                    is_player_alive = False
+
+                else:
+                    print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+
+            elif chans == "10%":
+                ute_ur_spelet = random.randint(1,100)
+                if ute_ur_spelet < 11:
+                    print("Kejsaren vänder sin hand med tummen neråt, och vakter går ut på arenan och släppar bort dig.")
+
+                    print("Du vågar inte tänka på vad som kommer hända dig, och det sista du ser innan ljuset försvinner är publiken som buar åt kejsaren.")
+                    is_player_alive = False
+
+                else:
+                    print("Kejsaren vänder sin hand med tummen uppåt, och du vinner fighten! Din motståndare blir utsläppad av vakter och publiken jublar.")
+
     else:
         print("Publiken har tröttnat och vill rösta.")
         print("Du har" + Fore.GREEN + str(omtyckt) + Fore.RESET + "omtyckthetspoäng hos publiken, vilket innebär en" + Fore.RED + (chans) + Fore.RESET + "att bli utröstad.")
+
         if chans == "75%":
             ute_ur_spelet = random.randint(1, 100)
             if ute_ur_spelet < 76:
@@ -612,10 +838,12 @@ def röstsystem():
                 time.sleep(3)
                 print("Och du får de flesta rösterna, du blir utröstad och bort buad från arenan. Du kommer aldrig kunna visa dig igen, och får leva som slav resten av ditt liv.")
                 is_player_alive = False
+
             else:
                 print("Publiken röstar...")
                 time.sleep(3)
                 print("Och din motståndare får de flesta rösterna! Han blir utröstad och blir bort buad från arenan.")
+
         elif chans == "50%":
             ute_ur_spelet = random.randint(1, 100)
             if ute_ur_spelet < 51:
@@ -623,10 +851,12 @@ def röstsystem():
                 time.sleep(3)
                 print("Och du får de flesta rösterna, du blir utröstad och bort buad från arenan. Du kommer aldrig kunna visa dig igen, och får leva som slav resten av ditt liv.")
                 is_player_alive = False
+
             else:
                 print("Publiken röstar...")
                 time.sleep(3)
                 print("Och din motståndare får de flesta rösterna! Han blir utröstad och blir bort buad från arenan.")
+
         elif chans == "25%":
             ute_ur_spelet = random.randint(1, 100)
             if ute_ur_spelet < 26:
@@ -634,10 +864,12 @@ def röstsystem():
                 time.sleep(3)
                 print("Och du får de flesta rösterna, du blir utröstad och bort buad från arenan. Du kommer aldrig kunna visa dig igen, och får leva som slav resten av ditt liv.")
                 is_player_alive = False
+
             else:
                 print("Publiken röstar...")
                 time.sleep(3)
                 print("Och din motståndare får de flesta rösterna! Han blir utröstad och blir bort buad från arenan.")
+
         elif chans == "10%":
             ute_ur_spelet = random.randint(1, 100)
             if ute_ur_spelet < 11:
@@ -645,13 +877,14 @@ def röstsystem():
                 time.sleep(3)
                 print("Och du får de flesta rösterna, du blir utröstad och bort buad från arenan. Du kommer aldrig kunna visa dig igen, och får leva som slav resten av ditt liv.")
                 is_player_alive = False
+
             else:
                 print("Publiken röstar...")
                 time.sleep(3)
                 print("Och din motståndare får de flesta rösterna! Han blir utröstad och blir bort buad från arenan.")
 
 
-
+#Här är själva fightfunktionen som den spelas om och om igen tills spelaren dör.
 while spelare_hälsopoäng > 0 and fiende_hälsopoäng > 0:
     träffar = False
     print(f"Runda {runda}")
@@ -687,4 +920,15 @@ while spelare_hälsopoäng > 0 and fiende_hälsopoäng > 0:
     runda += 1
     if runda > 20:
         röstsystem()
-affären(romdaler)
+affären()
+
+
+#Detta är systemet som kollar i slutet av varje match om spelaren har nått sitt mål och har klarat spelet.
+if svårighet == (1) and vunna_fighter == 5:
+    ...#Outro
+
+elif svårighet == (2) and vunna_fighter == 10:
+    ...#Outro
+
+elif svårighet == (3) and vunna_fighter == 15:
+    ...#Outro
