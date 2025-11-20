@@ -18,7 +18,7 @@ def clear_screen():
 for i in range(100):
     print(f"Loading ({load}%)")
     load += 1
-    time.sleep(0.05)
+    time.sleep(0.025)
     clear_screen()
 
 
@@ -29,7 +29,7 @@ print(Fore.RED + Style.BRIGHT + "BLOOD AND HONOR\n")
 menu_choice = 0
 times = 0
 gladiator = 0
-svårighet = ("lätt")
+svårighet = 2
 romdaler = 0
 kejsaren_närvarande = ["närvarande!", "inte närvarande.","inte närvarande.", "inte närvarande.", "närvarande!", "inte närvarande.","inte närvarande.", "inte närvarande.", "närvarande!", "inte närvarande.","inte närvarande.", "inte närvarande.",]
 fiende = ["Tiger", "Tiger", "Tiger", "Gladiator", "Gladiator", "Gladiator", "Gladiator", "Gladiator", "Gladiator", "Gladiator", "Gladiator", "Gladiator"]
@@ -41,13 +41,14 @@ spelare_hälsopoäng = 10
 fiende_hälsopoäng = 10
 vapen_skada = 3
 spelare_vapen = vapen_skada
-
+namn = None
+musik = True
 
 vapen_träffchans = None
-
 träffar = False
 
 omtyckt = 0
+fiende_omtyckthet = 0
 
 vunna_fighter = 0
 
@@ -61,7 +62,7 @@ while menu_choice != ("5"):
     print(Fore.RESET + Style.BRIGHT + "===============================================================================================================================")
     print(Style.BRIGHT + Fore.WHITE + "Spelmeny\n" + Style.RESET_ALL + Fore.RED + "Gore        " + Fore.GREEN +"Välj Gladiator   "  + Fore.YELLOW + "Svårighetsgrad\n")
     menu_choice = input(Fore.RESET + "Klicka 1 för att sätta på eller av Gore(Blodiga effekter)\n" 
-    "Klicka 2 för att välja svårighetsgrad \nKlicka 3 för att välja karaktär \nKlicka 4 för att börja spela\n:")
+    "Klicka 2 för att välja svårighetsgrad \nKlicka 3 för att välja karaktär \nKlicka 4 för att sätta på/av musik\nKlicka 5 för att spela\n:")
     if menu_choice == ("1"):
         sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
         time.sleep(0.7)
@@ -83,7 +84,7 @@ while menu_choice != ("5"):
         sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
         time.sleep(0.7)
         print("Svårighetsgraderna är (lätt), (medel), (expert).")
-        svårighet = input("Vilken svårighet vill du ha?")
+        svårighet = input("Vilken svårighet vill du ha?").lower()
         if svårighet == ("lätt"):
             sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
             time.sleep(0.7)
@@ -134,7 +135,9 @@ while menu_choice != ("5"):
             print("2. Maximus Decimus Meridius\nEn äldre romersk general som blivit förråd och fått sin familj mördad. " \
             "Han är redo att ge igen mot allt och alla som förstört honom.")
             print("Egenskaper:\n" + Fore.GREEN + "+ Är skicklig med kortsvärd\n+ Ger ibland iväg ett vrål, som sänker fiendens moral, som sänker deras träffchans\n" + Fore.RED + "- På grund av sin ålder, är långsammare och gör mindre skada.\n\n" + Fore.RESET)
-            gladiator = (input("Välj din gladiator(1 eller 2)"))
+
+            print("3. Egen\n Inga fördelar eller nackdelar")
+            gladiator = input("Välj din gladiator(1, 2 eller 3)")
             sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
             time.sleep(0.7)
 
@@ -142,6 +145,8 @@ while menu_choice != ("5"):
                 gladiator = ("Bobius Bobiusson")
             elif gladiator == "2":
                 gladiator = ("Maximus Decimus Meridius")
+            elif gladiator == "3":
+                gladiator = input("Vad är ditt gladiator namn?")
             else:
                 print("Det var inte ett val, du får Bobius Bobsson. Gör om detta ifall du vill ha en annan.")
                 gladiator = ("Bobius Bobiusson")
@@ -151,20 +156,26 @@ while menu_choice != ("5"):
                 gladiator = (1)
             elif gladiator == ("Maximus Decimus Meridius"):
                 gladiator = (2)
+            else:
+                gladiator = (3)
         elif kön_val == "kvinna":
-            print("3. Berlinda Bobsson\nEn soldatkvinna från söder, tagen som slav är farlig med kroksablar, och förbluffar fiender med hennes snabbhet.\nHon är fast besluten att ta sig hem till södern.")
+            print("1. Berlinda Bobsson\nEn soldatkvinna från söder, tagen som slav är farlig med kroksablar, och förbluffar fiender med hennes snabbhet.\nHon är fast besluten att ta sig hem till södern.")
             print("Egenskaper:\n" + Fore.GREEN + "+ Är skicklig med kroksablar\n+ Är väldigt snabb, har ökad träffchans\n" + Fore.RED + "- Gör mindre skada på grund av gammal skada\n\n" + Fore.RESET)
 
-            print("4. Emilia Neosdotter\nEn tjuv som tillsluts tagits efter flera år av stölder och terrorisering.\nEmilia är väldigt gymnastisk och farlig på grund av hennes kunnighet inom stridskonst.")
+            print("2. Emilia Neosdotter\nEn tjuv som tillslut tagits efter flera år av stölder och terrorisering.\nEmilia är väldigt gymnastisk och farlig på grund av hennes kunnighet inom stridskonst.")
             print("Egenskaper:\n" + Fore.GREEN + "+ Är skickligast utan vapen\n+ Är väldigt kvick, och är svårare att träffa\n" + Fore.RED + "- Gör mindre skada på grund av svaghet\n\n" + Fore.RESET)
-            gladiator = (input("Välj din gladiator(3 eller 4)"))
+            
+            print("3. Egen\n Inga fördelar eller nackdelar")
+            gladiator = input("Välj din gladiator(1, 2 eller 3)")
             sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
             time.sleep(0.7)
 
-            if gladiator == "3":
+            if gladiator == "1":
                 gladiator = ("Berlinda Bobsson")
-            elif gladiator == "4":
+            elif gladiator == "2":
                 gladiator = ("Emilia Neosdotter")
+            elif gladiator == "3":
+                gladiator = input("Vad är ditt gladiator namn?")
             else:
                 print("Det var inte ett val, du får Berlinda Bobsson. Gör om detta ifall du vill ha en annan.")
                 gladiator = ("Berlinda Bobsson")
@@ -175,32 +186,40 @@ while menu_choice != ("5"):
                 gladiator = (3)
             elif gladiator == ("Emilia Neosdotter"):
                 gladiator = (4)
+            else:
+                gladiator = (5)
 
         kön_val = None
         print(" ")
         input("Tryck valfri tangent för att komma tillbaka till menyn...\n")
 
     if menu_choice == "4":
+        sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+        time.sleep(0.7)
         print("Vill du ha på musik? (På) eller (Av)")
         musik = input(":")
+        sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
+        time.sleep(0.7)
         if musik == "På" or musik == "på" or musik == "PÅ" or musik == "Ja" or musik == "ja" or musik == "JA":
-            print("Musik är nu av.")
-            musik = False
-        else:
             print("Musik är nu på.")
             musik = True
+            
+        else:
+            print("Musik är nu av.")
+            musik = False
         print(" ")
         input("Tryck valfri tangent för att komma tillbaka till menyn...\n")
         
     
     if menu_choice == "5":
+        sound.stop()
         sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
         time.sleep(0.7)
         load = 0
         for i in range(100):
             print(f"Loading ({load}%)")
             load += 1
-            time.sleep(0.05)
+            time.sleep(0.025)
             clear_screen()
         
 
@@ -208,39 +227,57 @@ while menu_choice != ("5"):
         
 #################################################################################################################################
 
-sound.stop()
+
 
 
 #Här ställs hälsan för spelare, fiende och grund skada hos vapen in beroende på vilken svårighet man valde, 
 #man får dessutom ett extra omtyckthets poäng om man valde expert, och man får ett extra poäng om man är namnlös, alltså inte valde någon gladiator.
 #Här ställs det dessutom in hur många fighter man behöver vinna för att få sin frihet.
 if svårighet == (1):
-    spelare_hälsopoäng = 15
+    spelare_hälsopoäng = 20
     fiende_hälsopoäng = 10
     vapen_skada = 3
     tiger_skada = 2
     drake_skada = 3
+    omtyckt = 0
 
 elif svårighet == (2):
-    spelare_hälsopoäng = 10
+    spelare_hälsopoäng = 15
     fiende_hälsopoäng = 10
     vapen_skada = 2
     tiger_skada = 3
     drake_skada = 4
+    omtyckt = 0
 
 elif svårighet == (3):
     spelare_hälsopoäng = 10
-    fiende_hälsopoäng = 15
+    fiende_hälsopoäng = 10
     vapen_skada = 1
     tiger_skada = 4
     drake_skada = 5
-    omtyckt += 1
+    omtyckt = 1
 
-#De olika vapnen som finns i spelet, här konfigueras deras skada utifrån svårigheten, plus deras grund skada.
-Händer = (vapen_skada)
-Kortsvärd = 1 + (vapen_skada)
-Yxor = 2 + (vapen_skada)
-Kroksabel = 3 + (vapen_skada)
+#De olika vapnen som finns i spelet, här konfigueras deras skada utifrån svårigheten och karaktär plus deras grund skada.
+if gladiator == (4):
+    Händer = (vapen_skada) + 2
+else:
+    Händer = (vapen_skada)
+
+if gladiator == (2):
+    Kortsvärd = 1 + (vapen_skada) + 2
+else:
+    Kortsvärd = 1 + (vapen_skada)
+
+if gladiator == (1):
+    Yxor = 2 + (vapen_skada) + 2
+else:
+    Yxor = 2 + (vapen_skada)
+
+if gladiator == (3):
+    Kroksabel = 3 + (vapen_skada) + 2
+else:
+    Kroksabel = 3 + (vapen_skada)
+
 Spjut = 4 + (vapen_skada)
 Pilbåge = 3 + (vapen_skada)
 
@@ -255,6 +292,7 @@ def affären():
     if musik == True:
         sound_4 = playsound("C:/Gladiatorerna/Affärmusik.mp4", block=False)
     while marknaden != "1":
+        clear_screen()
         köp = "Nej"
         val = None
         print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
@@ -366,6 +404,7 @@ def affären():
         elif val == "porr" or val == "Porr" or val == "droger" or val == "drogas" or val == "människor" or val == "din mamma" or val == "mami" or val == "papi" or val == "dih" or val == "strap-on":
             is_player_alive = False
             print("Butiksvärden blir förolämpad av ditt svar och slår ihjäl dig. Vilken lättkränkt man.")
+            time.sleep(5)
             break
 
     
@@ -375,8 +414,8 @@ def affären():
     sound_4.stop()
 
 #################################
-vapen_attack = "Spjut"          #     Vilket vapen man börjar med.
-spelare_vapen = Spjut           #
+vapen_attack = "Händer"         #     Vilket vapen man börjar med.
+spelare_vapen = Händer          #
 #################################
 
 
@@ -393,7 +432,7 @@ elif vapen_attack == "Spjut":
 
 #Funktionen som kollar vilket vapen du har, räknar ut en random int, och kollar om du träffar
 def träff():
-    global vapen_träffchans, vapen_attack, träffar, fiende_hälsopoäng, vunna_fighter
+    global vapen_träffchans, vapen_attack, träffar, fiende_hälsopoäng, vunna_fighter, state_ai
     odds = 0
 
     if vapen_attack == "Kortsvärd":
@@ -405,10 +444,14 @@ def träff():
             if gore == True:
                 print("Du träffar din fiende med kortsvärdet, och det skär djupt in i fiendens mage, där blod sprutar och du ser din fiendes\n magsäck, och magsyran rinner ut i din fiendes kropp och fräter.")
                 fiende_hälsopoäng -= spelare_vapen
+                print("Din fiende backar defensivt och ställer sig stadigt.")
+                state_ai = "defensiv"
 
             elif gore == False:
                 print("Du träffar din fiende och fienden skriker till av smärta.")
                 fiende_hälsopoäng -= spelare_vapen
+                print("Din fiende backar defensivt och ställer sig stadigt.")
+                state_ai = "defensiv"
 
         else:
             träffar = False
@@ -423,10 +466,14 @@ def träff():
             if gore == True:
                 print("Du träffar din fiende med yxorna, och de sjunker djupt in i fiendens bröst, där blod sprutar och du ser en av din fiendes\n punkterade lungor, som kämpar att få in luft.")
                 fiende_hälsopoäng -= spelare_vapen
+                print("Din fiende backar defensivt och ställer sig stadigt.")
+                state_ai = "defensiv"
 
             elif gore == False:
                 print("Du träffar din fiende och fienden skriker till av smärta.")
                 fiende_hälsopoäng -= spelare_vapen
+                print("Din fiende backar defensivt och ställer sig stadigt.")
+                state_ai = "defensiv"
 
         else:
             träffar = False
@@ -441,10 +488,14 @@ def träff():
             if gore == True:
                 print("Du träffar din fiende med kroksabeln, och det skär över halsen på din fiende.\nDet bildas snabbt en blodpöl och din fiende tappar medvetandet, men vaknar sedan snabbt upp för att slåss.")
                 fiende_hälsopoäng -= spelare_vapen
+                print("Din fiende backar defensivt och ställer sig stadigt.")
+                state_ai = "defensiv"
 
             elif gore == False:
                 print("Du träffar din fiende och fienden skriker till av smärta.")
                 fiende_hälsopoäng -= spelare_vapen
+                print("Din fiende backar defensivt och ställer sig stadigt.")
+                state_ai = "defensiv"
 
         else:
             träffar = False
@@ -459,14 +510,24 @@ def träff():
             if gore == True:
                 print("Du träffar din fiende med spjutet, och du spetsar din fiende som en flagga. Blodet regnar ner på dig och din fiendes inälvor flyter ut på marken.\nFörvånadsvärt nog så hoppas fienden av ditt spjut och gör sig redo att anfalla.")
                 fiende_hälsopoäng -= spelare_vapen
+                print("Din fiende backar defensivt och ställer sig stadigt.")
+                state_ai = "defensiv"
 
             elif gore == False:
                 print("Du träffar din fiende och fienden skriker till av smärta.")
                 fiende_hälsopoäng -= spelare_vapen
+                print("Din fiende backar defensivt och ställer sig stadigt.")
+                state_ai = "defensiv"
 
         else:
             träffar = False
             print("Du missar din fiende.")
+
+
+
+
+
+
 
 
 #Här bestäms det inför varje fight vilken motståndare man möter, om det är en gladiatior isåfall vilket vapen, och om kejsaren är där eller inte.
@@ -476,145 +537,342 @@ kejsaren = random.choice(kejsaren_närvarande)
 if fienden == "Gladiator":
     gladiatorns_vapen_för_striden = random.choice(gladiatorns_vapen)
 
+återattack = 0
 #Här beräknas det om ai:n får in en träff på spelaren, beroende på vilken fiende det är och vilket vapen den använder
 def ai():
-    global fienden, gladiatorns_vapen_för_striden, spelare_hälsopoäng, vapen_skada, spelare_vapen
+    global fienden, gladiatorns_vapen_för_striden, spelare_hälsopoäng, vapen_skada, spelare_vapen, fiende_omtyckthet, gladiator_attack, state_ai, återattack
     if fienden == "Gladiator":
         if svårighet == (1):
-            if gladiatorns_vapen_för_striden == "ett Kortsvärd":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 5 or ai_träffar == 7 or ai_träffar == 9 or ai_träffar == 10:
-                    if gore == True: #Här kollar systemet om och om igen vilken beskrivning den ska ge beroende på statusen av Gore inställningen
-                        print("Du blir träffad av din fiende och blodet börjar rinna från din mun. Du samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kortsvärd
-                    else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kortsvärd
+            gladiator_attack = random.randint(1,3)
+            if gladiator_attack == 3:
+                fiende_briljera = random.randint(1, 10)
+                if fiende_briljera != 1 or fiende_briljera != 5 or fiende_briljera != 8:
+                    fiende_omtyckthet += 2
+                    print("Din fiende hånar dig samtidigt som hen svingar runt sitt vapen och dansar.")
+                    print("Du känner en vrede växa inom dig.")
                 else:
-                    print("Du parerar din fiendes kortsvärd och returnerar med en egen attack, men du blir parerad.")
-            elif gladiatorns_vapen_för_striden == "en Kroksabel":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7 or ai_träffar == 9:
-                    if gore == True:
-                        print("Du blir träffad av din fiende och blodet börjar sprutar från ditt sår. Du samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kroksabel
+                    fiende_omtyckthet -= 2
+                    print("Din fiende börjar sivnga runt sitt vapen och hånar dig, men tappar sitt vapen!")
+                    print("Du skäms för din motståndare och likaså publiken.")
+            else:
+                if gladiatorns_vapen_för_striden == "ett Kortsvärd":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 5 or ai_träffar == 7 or ai_träffar == 9 or ai_träffar == 10:
+                        if gore == True: #Här kollar systemet om och om igen vilken beskrivning den ska ge beroende på statusen av Gore inställningen
+                            print("Du blir träffad av din fiende och blodet börjar rinna från din mun. Du samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kortsvärd
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kortsvärd
                     else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kroksabel
-                else:
-                    print("Du aktar dig för din fiendes kroksabel och ställer dig i en attack position.")
-            elif gladiatorns_vapen_för_striden == "ett Spjut":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 3 or ai_träffar == 7:
-                    if gore == True:
-                        print("Du blir träffad av din fiende och du börjar bli spetsad.Du tar dig loss och samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Spjut
+                        print("Du parerar din fiendes kortsvärd och returnerar med en egen attack, men du blir parerad.")
+                elif gladiatorns_vapen_för_striden == "en Kroksabel":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7 or ai_träffar == 9:
+                        if gore == True:
+                            print("Du blir träffad av din fiende och blodet börjar sprutar från ditt sår. Du samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kroksabel
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kroksabel
                     else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Spjut
-                else:
-                    print("Du hoppar bort från din fiendes spjut och tar dig in för att skicka en farlig motattack.")
-            elif gladiatorns_vapen_för_striden == "en Pilbåge":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7:
-                    if gore == True:
-                        print("Du blir träffad av en pil och blod flyter ut från ditt sår. Du samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Pilbåge
+                        print("Du aktar dig för din fiendes kroksabel och ställer dig i en attack position.")
+                elif gladiatorns_vapen_för_striden == "ett Spjut":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 3 or ai_träffar == 7:
+                        if gore == True:
+                            print("Du blir träffad av din fiende och du börjar bli spetsad.Du tar dig loss och samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Spjut
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Spjut
                     else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Pilbåge
-                else:
-                    print("Du duckar för pilen och din fiende tittar på dig förskräckt medan han försöker ta fram en ny pil.\nDu närmar dig för att anfalla.")
+                        print("Du hoppar bort från din fiendes spjut och tar dig in för att skicka en farlig motattack.")
+                elif gladiatorns_vapen_för_striden == "en Pilbåge":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7:
+                        if gore == True:
+                            print("Du blir träffad av en pil och blod flyter ut från ditt sår. Du samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Pilbåge
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Pilbåge
+                    else:
+                        print("Du duckar för pilen och din fiende tittar på dig förskräckt medan han försöker ta fram en ny pil.\nDu närmar dig för att anfalla.")
         elif svårighet == (2):
-            if gladiatorns_vapen_för_striden == "ett Kortsvärd":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 5 or ai_träffar == 7 or ai_träffar == 9 or ai_träffar == 10:
-                    if gore == True:
-                        print("Du blir träffad av din fiende och blodet börjar rinna från din mun. Du samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kortsvärd
-                    else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kortsvärd
+            gladiator_attack = random.randint(1,3)
+            if gladiator_attack == 3:
+                fiende_briljera = random.randint(1, 10)
+                if fiende_briljera != 1 or fiende_briljera != 5 or fiende_briljera != 8 or fiende_briljera != 10:
+                    fiende_omtyckthet += 2
+                    print("Din fiende hånar dig samtidigt som hen svingar runt sitt vapen och dansar.")
+                    print("Du känner en vrede växa inom dig.")
                 else:
-                    print("Du parerar din fiendes kortsvärd och returnerar med en egen attack, men du blir parerad.")
-            elif gladiatorns_vapen_för_striden == "en Kroksabel":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7 or ai_träffar == 9:
-                    if gore == True:
-                        print("Du blir träffad av din fiende och blodet börjar sprutar från ditt sår. Du samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kroksabel
+                    fiende_omtyckthet -= 2
+                    print("Din fiende börjar sivnga runt sitt vapen och hånar dig, men tappar sitt vapen!")
+                    print("Du skäms för din motståndare och likaså publiken.")
+            else:
+                if gladiatorns_vapen_för_striden == "ett Kortsvärd":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 5 or ai_träffar == 7 or ai_träffar == 9 or ai_träffar == 10:
+                        if gore == True:
+                            print("Du blir träffad av din fiende och blodet börjar rinna från din mun. Du samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kortsvärd
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kortsvärd
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
                     else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kroksabel
-                else:
-                    print("Du aktar dig för din fiendes kroksabel och ställer dig i en attack position.")
-            elif gladiatorns_vapen_för_striden == "ett Spjut":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 3 or ai_träffar == 7:
-                    if gore == True:
-                        print("Du blir träffad av din fiende och du börjar bli spetsad.Du tar dig loss och samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Spjut
+                        print("Du parerar din fiendes kortsvärd och returnerar med en egen attack, men du blir parerad.")
+                        state_ai = "normal"
+                        återattack = 0
+                elif gladiatorns_vapen_för_striden == "en Kroksabel":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7 or ai_träffar == 9:
+                        if gore == True:
+                            print("Du blir träffad av din fiende och blodet börjar sprutar från ditt sår. Du samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kroksabel
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kroksabel
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
                     else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Spjut
-                else:
-                    print("Du hoppar bort från din fiendes spjut och tar dig in för att skicka en farlig motattack.")
-            elif gladiatorns_vapen_för_striden == "en Pilbåge":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7:
-                    if gore == True:
-                        print("Du blir träffad av en pil och blod flyter ut från ditt sår. Du samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Pilbåge
+                        print("Du aktar dig för din fiendes kroksabel och ställer dig i en attack position.")
+                        state_ai = "normal"
+                        återattack = 0
+                elif gladiatorns_vapen_för_striden == "ett Spjut":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 3 or ai_träffar == 7:
+                        if gore == True:
+                            print("Du blir träffad av din fiende och du börjar bli spetsad.Du tar dig loss och samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Spjut
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Spjut
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
                     else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Pilbåge
-                else:
-                    print("Du duckar för pilen och din fiende tittar på dig förskräckt medan han försöker ta fram en ny pil.\nDu närmar dig för att anfalla.")
+                        print("Du hoppar bort från din fiendes spjut och tar dig in för att skicka en farlig motattack.")
+                        state_ai = "normal"
+                        återattack = 0
+                elif gladiatorns_vapen_för_striden == "en Pilbåge":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7:
+                        if gore == True:
+                            print("Du blir träffad av en pil och blod flyter ut från ditt sår. Du samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Pilbåge
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Pilbåge
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
+                    else:
+                        print("Du duckar för pilen och din fiende tittar på dig förskräckt medan han försöker ta fram en ny pil.\nDu närmar dig för att anfalla.")
+                        state_ai = "normal"
+                        återattack = 0
         elif svårighet == (3):
-            if gladiatorns_vapen_för_striden == "ett Kortsvärd":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 5 or ai_träffar == 7 or ai_träffar == 9 or ai_träffar == 10:
-                    if gore == True:
-                        print("Du blir träffad av din fiende och blodet börjar rinna från din mun. Du samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kortsvärd
-                    else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kortsvärd
+            gladiator_attack = random.randint(1,3)
+            if gladiator_attack == 3:
+                fiende_briljera = random.randint(1, 10)
+                if fiende_briljera != 1 or fiende_briljera != 5 or fiende_briljera != 8 or fiende_briljera != 10:
+                    fiende_omtyckthet += 2
+                    print("Din fiende hånar dig samtidigt som hen svingar runt sitt vapen och dansar.")
+                    print("Du känner en vrede växa inom dig.")
                 else:
-                    print("Du parerar din fiendes kortsvärd och returnerar med en egen attack, men du blir parerad.")
-            elif gladiatorns_vapen_för_striden == "en Kroksabel":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7 or ai_träffar == 9:
-                    if gore == True:
-                        print("Du blir träffad av din fiende och blodet börjar sprutar från ditt sår. Du samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kroksabel
+                    fiende_omtyckthet -= 2
+                    print("Din fiende börjar sivnga runt sitt vapen och hånar dig, men tappar sitt vapen!")
+                    print("Du skäms för din motståndare och likaså publiken.")
+            else:
+                if gladiatorns_vapen_för_striden == "ett Kortsvärd":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 5 or ai_träffar == 7 or ai_träffar == 9 or ai_träffar == 10:
+                        if gore == True:
+                            print("Du blir träffad av din fiende och blodet börjar rinna från din mun. Du samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kortsvärd
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kortsvärd
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
                     else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Kroksabel
-                else:
-                    print("Du aktar dig för din fiendes kroksabel och ställer dig i en attack position.")
-            elif gladiatorns_vapen_för_striden == "ett Spjut":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 3 or ai_träffar == 7:
-                    if gore == True:
-                        print("Du blir träffad av din fiende och du börjar bli spetsad.Du tar dig loss och samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Spjut
+                        print("Du parerar din fiendes kortsvärd och returnerar med en egen attack, men du blir parerad.")
+                        state_ai = "normal"
+                        återattack = 0
+                elif gladiatorns_vapen_för_striden == "en Kroksabel":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7 or ai_träffar == 9:
+                        if gore == True:
+                            print("Du blir träffad av din fiende och blodet börjar sprutar från ditt sår. Du samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kroksabel
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Kroksabel
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
                     else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Spjut
-                else:
-                    print("Du hoppar bort från din fiendes spjut och tar dig in för att skicka en farlig motattack.")
-            elif gladiatorns_vapen_för_striden == "en Pilbåge":
-                ai_träffar = random.randint(1, 10)
-                if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7:
-                    if gore == True:
-                        print("Du blir träffad av en pil och blod flyter ut från ditt sår. Du samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Pilbåge
+                        print("Du aktar dig för din fiendes kroksabel och ställer dig i en attack position.")
+                        state_ai = "normal"
+                        återattack = 0
+                elif gladiatorns_vapen_för_striden == "ett Spjut":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 3 or ai_träffar == 7:
+                        if gore == True:
+                            print("Du blir träffad av din fiende och du börjar bli spetsad.Du tar dig loss och samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Spjut
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Spjut
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
                     else:
-                        print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
-                        spelare_hälsopoäng -= Pilbåge
-                else:
-                    print("Du duckar för pilen och din fiende tittar på dig förskräckt medan han försöker ta fram en ny pil.\nDu närmar dig för att anfalla.")
+                        print("Du hoppar bort från din fiendes spjut och tar dig in för att skicka en farlig motattack.")
+                        state_ai = "normal"
+                        återattack = 0
+                elif gladiatorns_vapen_för_striden == "en Pilbåge":
+                    ai_träffar = random.randint(1, 10)
+                    if ai_träffar == 1 or ai_träffar == 3 or ai_träffar == 7:
+                        if gore == True:
+                            print("Du blir träffad av en pil och blod flyter ut från ditt sår. Du samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Pilbåge
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
+                        else:
+                            print("Du blir träffad av din fiende, men samlar dig för att slå tillbaka.")
+                            spelare_hälsopoäng -= Pilbåge
+                            state_ai = "aggressiv"
+                            if återattack == 2:
+                                återattack = 0
+                                state_ai = "normal"
+                            else:
+                                print("Din fiende blir kaxig och attackerar igen.")
+                                återattack += 1
+                                time.sleep(5)
+                                ai()
+                    else:
+                        print("Du duckar för pilen och din fiende tittar på dig förskräckt medan han försöker ta fram en ny pil.\nDu närmar dig för att anfalla.")
+                        state_ai = "normal"
+                        återattack = 0
                     #Här kollar systemet om fienden är en tiger, och isåfall om den ska träffa spelaren
     elif fienden == "Tiger":
         ai_träffar = random.randint(1, 4)
@@ -622,52 +880,75 @@ def ai():
             if gore == True:
                 print("Du blir träffad av tigerns klor och blod sprutar ut på marken som tigern slickar på, du gör dig redo att attackera.")
                 spelare_hälsopoäng -= tiger_skada
+                state_ai = "aggressiv"
+                if återattack == 2:
+                    återattack = 0
+                    state_ai = "normal"
+                else:
+                    print("Din fiende blir kaxig och attackerar igen.")
+                    återattack += 1
+                    time.sleep(5)
+                    ai()
             else:
                 print("Du blir träffad av tigerns klor, du faller bak men gör dig redo att anfalla.")
+                spelare_hälsopoäng -= tiger_skada
+                state_ai = "aggressiv"
+                if återattack == 2:
+                    återattack = 0
+                    state_ai = "normal"
+                else:
+                    print("Din fiende blir kaxig och attackerar igen.")
+                    återattack += 1
+                    time.sleep(5)
+                    ai()
 
         else:
             print("Du undvek tigern och närmar dig besten för att attackera.")
+            state_ai = "normal"
+            återattack = 0
           #Under fighten så finns det en liten chans att en drake kommer och invaderar
     elif fienden == "Drake":
         ai_träffar = random.randint(1,10)
         if ai_träffar == 1:
             if gore == True:
-                print("Draken andas ut eld på dig och du börjar brinna, du skriker av smärta,\nDu känner din hud smälta och ditt vapen går sönder.")
+                print("Draken andas ut eld på dig och du börjar brinna, du skriker av smärta,\nDin hud smälter och ditt vapen går sönder.")
                 spelare_hälsopoäng -= drake_skada
+                state_ai = "aggressiv"
                 spelare_vapen = Händer
+                if återattack == 2:
+                    återattack = 0
+                    state_ai = "normal"
+                else:
+                    print("Din fiende blir kaxig och attackerar igen.")
+                    återattack += 1
+                    time.sleep(5)
+                    ai()
             else:
                 print("Draken andas ut eld på dig och du börjar brinna, du skriker av smärta och ditt vapen går sönder.")
                 spelare_hälsopoäng -= drake_skada
+                state_ai = "aggressiv"
                 spelare_vapen = Händer
+                if återattack == 2:
+                    återattack = 0
+                    state_ai = "normal"
+                else:
+                    print("Din fiende blir kaxig och attackerar igen.")
+                    återattack += 1
+                    time.sleep(5)
+                    ai()
 
         else:
             print("Du undvek drakens eld och går nära för att anfalla.")
+            state_ai = "normal"
+            återattack = 0
         
             
-        
-#Här är den allra första fighten, därför är det en annorlunda text, man möter inte en stor drake eller tiger sin första match, och kejsaren är inte närvarande för att man är okänd.
-print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
-print("Du går in i mäktiga Coloseum för första gången, och publiken iaktar dig misstänksamt, de känner inte igen dig.\nKejsaren är inte närvarande, och framför dig så ser du din första fiende, en gladiator.")
-print(f"Dina trasor till kläder fläktar i vinden, och {vapen} är vid din sida. Du och din motståndare är redo att slåss.")
-print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
-#sätt in anpassad fight här
+    
     
 
 print("")
 
-#Här börjar den riktiga fighten
-print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
-fienden = random.choice(fiende)
-kejsaren = random.choice(kejsaren_närvarande)
-if fienden == "Gladiator":
-    gladiatorns_vapen_för_striden = random.choice(gladiatorns_vapen)
 
-if fienden == "Gladiator":
-    print(f"Du går in i mäktiga Colosseum, publiken jublar och hejar fram dig. Framför dig så står en Gladiator med {gladiatorns_vapen_för_striden}!\nKejsaren är {kejsaren} Du och din motståndare är redo att slåss.") 
-else:
-    print(f"Du går in i mäktiga Colosseum, publiken jublar och hejar fram dig. Framför dig så står en {fienden}!\nKejsaren är {kejsaren} Du och din motståndare är redo att slåss.")
-
-print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
 
 
 #Här är funktionen för hur röstsystemet fungerar, alltså vad som händer om fighten tar för lång tid, och beroende på om kejsaren är där eller inte, och vissa utfall av vad han gör när han är där, så händer olika saker:)
@@ -829,73 +1110,79 @@ def röstsystem():
 
     else:
         print("Publiken har tröttnat och vill rösta.")
-        print("Du har" + Fore.GREEN + str(omtyckt) + Fore.RESET + "omtyckthetspoäng hos publiken, vilket innebär en" + Fore.RED + (chans) + Fore.RESET + "att bli utröstad.")
+        print("Du har " + Fore.GREEN + str(omtyckt) + Fore.RESET + " omtyckthetspoäng hos publiken, vilket innebär en " + Fore.RED + (chans) + Fore.RESET + " att bli utröstad.\n")
+        time.sleep(3)
 
         if chans == "75%":
             ute_ur_spelet = random.randint(1, 100)
             if ute_ur_spelet < 76:
                 print("Publiken röstar...")
-                time.sleep(3)
+                time.sleep(6)
                 print("Och du får de flesta rösterna, du blir utröstad och bort buad från arenan. Du kommer aldrig kunna visa dig igen, och får leva som slav resten av ditt liv.")
                 is_player_alive = False
 
             else:
                 print("Publiken röstar...")
-                time.sleep(3)
+                time.sleep(6)
                 print("Och din motståndare får de flesta rösterna! Han blir utröstad och blir bort buad från arenan.")
 
         elif chans == "50%":
             ute_ur_spelet = random.randint(1, 100)
             if ute_ur_spelet < 51:
                 print("Publiken röstar...")
-                time.sleep(3)
+                time.sleep(6)
                 print("Och du får de flesta rösterna, du blir utröstad och bort buad från arenan. Du kommer aldrig kunna visa dig igen, och får leva som slav resten av ditt liv.")
                 is_player_alive = False
 
             else:
                 print("Publiken röstar...")
-                time.sleep(3)
+                time.sleep(6)
                 print("Och din motståndare får de flesta rösterna! Han blir utröstad och blir bort buad från arenan.")
 
         elif chans == "25%":
             ute_ur_spelet = random.randint(1, 100)
             if ute_ur_spelet < 26:
                 print("Publiken röstar...")
-                time.sleep(3)
+                time.sleep(6)
                 print("Och du får de flesta rösterna, du blir utröstad och bort buad från arenan. Du kommer aldrig kunna visa dig igen, och får leva som slav resten av ditt liv.")
                 is_player_alive = False
 
             else:
                 print("Publiken röstar...")
-                time.sleep(3)
+                time.sleep(6)
                 print("Och din motståndare får de flesta rösterna! Han blir utröstad och blir bort buad från arenan.")
 
         elif chans == "10%":
             ute_ur_spelet = random.randint(1, 100)
             if ute_ur_spelet < 11:
                 print("Publiken röstar...")
-                time.sleep(3)
+                time.sleep(6)
                 print("Och du får de flesta rösterna, du blir utröstad och bort buad från arenan. Du kommer aldrig kunna visa dig igen, och får leva som slav resten av ditt liv.")
                 is_player_alive = False
 
             else:
                 print("Publiken röstar...")
-                time.sleep(3)
+                time.sleep(6)
                 print("Och din motståndare får de flesta rösterna! Han blir utröstad och blir bort buad från arenan.")
 
-
-#Här är själva fightfunktionen som den spelas om och om igen tills spelaren dör.
-while spelare_hälsopoäng > 0 and fiende_hälsopoäng > 0:
+#Här är den allra första fighten, därför är det en annorlunda text, man möter inte en stor drake eller tiger sin första match, och kejsaren är inte närvarande för att man är okänd.
+print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
+print("Du går in i mäktiga Coloseum för första gången, och publiken iaktar dig misstänksamt, de känner inte igen dig.\nKejsaren är inte närvarande, och framför dig så ser du din första fiende, en Gladiator.")
+print(f"Dina trasor till kläder fläktar i vinden, och {vapen} är vid din sida. Du och din motståndare är redo att slåss.")
+print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
+while spelare_hälsopoäng > 0 and fiende_hälsopoäng > 0:    #anpassad första fight, för att låta det vara lätt att komma in i spelet.
     träffar = False
+    fienden = "Gladiator"
+    gladiatorns_vapen_för_striden = "ett Spjut"
     print(f"Runda {runda}")
     print("Du har " + Fore.GREEN + str(spelare_hälsopoäng) + Fore.RESET + " hälsopoäng kvar, och din motståndare har " + Fore.RED +  str(fiende_hälsopoäng) + Fore.RESET + " hälsopoäng kvar.")
     print(f"Du har {omtyckt} omtyckthetspoäng hos publiken.")
-    
-    print("Vad använder du för attack?\n(1)" + Fore.YELLOW + "Kvickt slag " + Fore.RESET + "(" + Fore.RED + str(vapen_skada) + Fore.RESET + ")" + "(Träffchans(7/10)\n(2)" + Fore.YELLOW + str(vapen_attack) + Fore.RESET + " (" + Fore.RED + str(spelare_vapen) + Fore.RESET + ")" + str(vapen_träffchans))
-    attack_val = int(input("(1) eller (2):"))
-    if attack_val == 1:
+                
+    print("Vad använder du för attack?\n(1)" + Fore.YELLOW + "Kvickt slag " + Fore.RESET + "(" + Fore.RED + str(vapen_skada) + Fore.RESET + ")")
+    attack_val = input("(1)")
+    if attack_val == "1":
         slag = random.randint(1, 10)
-        if slag != 1 or slag != 5 or slag != 10:
+        if slag != 1 or slag != 3 or slag != 5 or slag != 10:
             träffar = True
             fiende_hälsopoäng -= vapen_skada
             if gore == True:
@@ -905,30 +1192,176 @@ while spelare_hälsopoäng > 0 and fiende_hälsopoäng > 0:
         else:
             träffar = False
             print("Du missar din fiende.")
-    elif attack_val == 2:
-        träff()
-    
+    else:
+        print("Du stod kvar, defensivt och stabilt.")
+
     print("Din fiende förbereder sig för att anfalla dig...")
     ai()
 
-    draken_kommer = random.randint(1,100)
-    if draken_kommer < 5:
-        ...
 
     input("")
-
+    if spelare_hälsopoäng < 1:
+        is_player_alive = False
     runda += 1
     if runda > 20:
         röstsystem()
+
+    clear_screen()
+
+romdaler += 20
+print("Du var så bra så du får ett kortsvärd av publiken!")
+vapen_attack = "Kortsvärd"         
+spelare_vapen = Kortsvärd 
+vapen = "ett kortsvärd"
+time.sleep(5)
+#Här är själva fightfunktionen som den spelas om och om igen tills spelaren dör.
+def fight():
+    global träffar, fiende_hälsopoäng, runda, fiende, kejsaren, kejsaren_närvarande, gladiatorns_vapen, gladiatorns_vapen_för_striden, omtyckt, fiende_omtyckthet, is_player_alive, spelare_hälsopoäng, tiger_skada, drake_skada, vapen_skada
+    if svårighet == (1):
+        spelare_hälsopoäng = 20
+        fiende_hälsopoäng = 10
+        vapen_skada = 3
+        tiger_skada = 2
+        drake_skada = 3
+        omtyckt = 0
+
+    elif svårighet == (2):
+        spelare_hälsopoäng = 15
+        fiende_hälsopoäng = 10
+        vapen_skada = 2
+        tiger_skada = 3
+        drake_skada = 4
+        omtyckt = 0
+
+    elif svårighet == (3):
+        spelare_hälsopoäng = 10
+        fiende_hälsopoäng = 10
+        vapen_skada = 1
+        tiger_skada = 4
+        drake_skada = 5
+        omtyckt = 1
+
+    print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
+    fienden = random.choice(fiende)
+    kejsaren = random.choice(kejsaren_närvarande)
+    if fienden == "Gladiator":
+        gladiatorns_vapen_för_striden = random.choice(gladiatorns_vapen)
+
+    if fienden == "Gladiator":
+        print(f"Du går in i mäktiga Colosseum, publiken jublar och hejar fram dig. Framför dig så står en Gladiator med {gladiatorns_vapen_för_striden}!\nKejsaren är {kejsaren} Du och din motståndare är redo att slåss.") 
+    else:
+        print(f"Du går in i mäktiga Colosseum, publiken jublar och hejar fram dig. Framför dig så står en {fienden}!\nKejsaren är {kejsaren} Du och din motståndare är redo att slåss.")
+    omtyckt = 0
+    fiende_omtyckthet = 0
+    runda = 0
+    print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
+    while spelare_hälsopoäng > 0 and fiende_hälsopoäng > 0:
+        träffar = False
+        print(f"Runda {runda}")
+        print("Du har " + Fore.GREEN + str(spelare_hälsopoäng) + Fore.RESET + " hälsopoäng kvar, och din motståndare har " + Fore.RED +  str(fiende_hälsopoäng) + Fore.RESET + " hälsopoäng kvar.")
+        print(f"Du har {omtyckt} omtyckthetspoäng hos publiken.")
+        
+        print("Vad använder du för attack?\n(1)" + Fore.YELLOW + "Kvickt slag " + Fore.RESET + "(" + Fore.RED + str(vapen_skada) + Fore.RESET + ")" + "(Träffchans(6/10)\n(2)" + Fore.YELLOW + str(vapen_attack) + Fore.RESET + " (" + Fore.RED + str(spelare_vapen) + Fore.RESET + ")" + str(vapen_träffchans))
+        print("(3)" + Fore.YELLOW + "Briljera" + Fore.RESET + " (Briljera dig med en 7/10 chans att lyckas)")
+        attack_val = input("(1) eller (2) eller (3):")
+        if attack_val == "1":
+            slag = random.randint(1, 10)
+            if slag != 1 or slag != 3 or slag != 5 or slag != 10:
+                träffar = True
+                fiende_hälsopoäng -= vapen_skada
+                if gore == True:
+                    print("Du träffar din fiende i bröstkorgen och du hör hur flera revben krossas inuti din fiendes kropp.\nDin fiende skriker till av smärta.")
+                elif gore == False:
+                    print("Du träffar ditt slag och din fiende flämtar till.")
+            else:
+                träffar = False
+                print("Du missar din fiende.")
+        elif attack_val == "2":
+            träff()
+        elif attack_val == "3":
+            briljera = 0
+            briljera = random.randint(1, 10)
+            if briljera != 1 or briljera != 3 or briljera != 5:
+                omtyckt += random.randint(1, 3)
+                print("Du börjar svinga runt ditt vapen och publiken jublar, din motståndare känner sig extremt hotad.")
+            else:
+                print("Du tappar ditt vapen under din uppvisning och arenan blir tyst.")
+                print("Din motståndare skäms för dig och ger dig tillbaka ditt vapen...")
+                omtyckt -= random.randint(1, 3)
+        else:
+            print("Du stod kvar, defensivt och stabilt.")
+        
+        print("Din fiende förbereder sig för att anfalla dig...")
+        ai()
+
+        draken_kommer = random.randint(1,100)
+        if draken_kommer < 5:
+            ...
+
+        input("")
+        if spelare_hälsopoäng < 1:
+            is_player_alive = False
+        runda += 1
+        if runda > 20:
+            röstsystem()
+
+        clear_screen()
+
 affären()
 
+while is_player_alive == True:
 
-#Detta är systemet som kollar i slutet av varje match om spelaren har nått sitt mål och har klarat spelet.
-if svårighet == (1) and vunna_fighter == 5:
-    ...#Outro
+    fight()
+    if is_player_alive == False:
+        print("Du dog, medan du slogs för din frihet. Människor kommer ihåg dig, men kommer glömma dig inom några månader.")
+        time.sleep(5)
+        break
+    else:
+        print("Din fiende faller till marken helt livlös.")
+        print("Du går ut ur arenan och går förbi affären, som du går in i...")
+        time.sleep(5)
+        vunna_fighter += 1
+        romdaler += random.randint(10, 30)
+    #Detta är systemet som kollar i slutet av varje match om spelaren har nått sitt mål och har klarat spelet.
+    if svårighet == (1) and vunna_fighter == 5:
+        print("Du hindras av kejsaren när du ska gå in i affären, och du får reda på att han har\nobserverat dig under en längre tid nu,")
+        print("och han vill släppa dig fri, som tack för det mod och den underhållning du bjudit på.")
+        time.sleep(15)
+        print("Han ger dig dock ett val att du kan fortsätta vara en gladiator till dina sista dagar, med en lyxvilla med alla bekvämligheter du kan tänka\ndig.")
+        print("Eller så kan du lämna och leva ett fritt liv precis så som du vill.")
+        sista_val = input("Vad väljer du? (Stanna) eller (Lämna)").lower()
+        if sista_val == "stanna":
+            print("Kejsaren är nöjd med dig och hans vakter eskorterar dig till din villa.\nDu sover och vaknar upp, gör dig i ordning, och går till arenan.")
+        elif sista_val == "lämna":
+            print("Kejsaren tittar missnöjt på dig men respekterar ditt val. Vakterna låser upp den järnport som stod mellan dig och frihet.\nDu är äntligen, fri.")
 
-elif svårighet == (2) and vunna_fighter == 10:
-    ...#Outro
+    elif svårighet == (2) and vunna_fighter == 10:
+        print("Du hindras av kejsaren när du ska gå in i affären, och du får reda på att han har\nobserverat dig under en längre tid nu,")
+        print("och han vill släppa dig fri, som tack för det mod och den underhållning du bjudit på.")
+        time.sleep(15)
+        print("Han ger dig dock ett val att du kan fortsätta vara en gladiator till dina sista dagar, med en lyxvilla med alla bekvämligheter du kan tänka\ndig.")
+        print("Eller så kan du lämna och leva ett fritt liv precis så som du vill.")
+        sista_val = input("Vad väljer du? (Stanna) eller (Lämna)").lower()
+        if sista_val == "stanna":
+            print("Kejsaren är nöjd med dig och hans vakter eskorterar dig till din villa.\nDu sover och vaknar upp, gör dig i ordning, och går till arenan.")
+        elif sista_val == "lämna":
+            print("Kejsaren tittar missnöjt på dig men respekterar ditt val. Vakterna låser upp den järnport som stod mellan dig och frihet.\nDu är äntligen, fri.")
 
-elif svårighet == (3) and vunna_fighter == 15:
-    ...#Outro
+    elif svårighet == (3) and vunna_fighter == 15:
+        print("Du hindras av kejsaren när du ska gå in i affären, och du får reda på att han har\nobserverat dig under en längre tid nu,")
+        print("och han vill släppa dig fri, som tack för det mod och den underhållning du bjudit på.")
+        time.sleep(15)
+        print("Han ger dig dock ett val att du kan fortsätta vara en gladiator till dina sista dagar, med en lyxvilla med alla bekvämligheter du kan tänka\ndig.")
+        print("Eller så kan du lämna och leva ett fritt liv precis så som du vill.")
+        sista_val = input("Vad väljer du? (Stanna) eller (Lämna)").lower()
+        if sista_val == "stanna":
+            print("Kejsaren är nöjd med dig och hans vakter eskorterar dig till din villa.\nDu sover och vaknar upp, gör dig i ordning, och går till arenan.")
+        elif sista_val == "lämna":
+            print("Kejsaren tittar missnöjt på dig men respekterar ditt val. Vakterna låser upp den järnport som stod mellan dig och frihet.\nDu är äntligen, fri.")
+    
+    affären()   
+
+if is_player_alive == True and sista_val == "stanna":
+    while is_player_alive == True:
+        fight()
+        affären()
