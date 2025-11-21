@@ -40,7 +40,7 @@ runda = 1
 spelare_hälsopoäng = 10
 fiende_hälsopoäng = 10
 vapen_skada = 3
-spelare_vapen = vapen_skada
+spelare_vapen = None
 namn = None
 musik = True
 
@@ -60,9 +60,9 @@ vunna_fighter = 0
 #Så länge som spelaren inte klickat på 5 för att börja spela, så är menyn igång
 while menu_choice != ("5"):
     print(Fore.RESET + Style.BRIGHT + "===============================================================================================================================")
-    print(Style.BRIGHT + Fore.WHITE + "Spelmeny\n" + Style.RESET_ALL + Fore.RED + "Gore        " + Fore.GREEN +"Välj Gladiator   "  + Fore.YELLOW + "Svårighetsgrad\n")
-    menu_choice = input(Fore.RESET + "Klicka 1 för att sätta på eller av Gore(Blodiga effekter)\n" 
-    "Klicka 2 för att välja svårighetsgrad \nKlicka 3 för att välja karaktär \nKlicka 4 för att sätta på/av musik\nKlicka 5 för att spela\n:")
+    print(Style.BRIGHT + Fore.WHITE + "Spelmeny\n" + Style.RESET_ALL)
+    menu_choice = input(Fore.RESET + "1 för att sätta på eller av Gore(Blodiga effekter)\n" 
+    "2 för att välja svårighetsgrad \n3 för att välja karaktär \n4 för att sätta på/av musik\n5 för att spela\n:")
     if menu_choice == ("1"):
         sound_5 = playsound("C:/Gladiatorerna/Val.mp4", block=False)
         time.sleep(0.7)
@@ -300,7 +300,7 @@ def affären():
         print(f"Du har {romdaler} romdaler kvar")
         print("")
         print(Style.RESET_ALL + "Vad vill du köpa idag?")
-        print("1. Kortsvärd (20r)\n2. Yxor (30r)\n3. Kroksabel (40)\n4. Spjut (50r)")
+        print("1. Kortsvärd (20r)\n2. Yxor (30r)\n3. Kroksabel (40r)\n4. Spjut (50r)\n5. (Lämna marknaden)")
         val = input(":")
         if val == "1" or val == "kortsvärd" or val == "Kortsvärd":
             if vapen == "ett kortsvärd":
@@ -1165,6 +1165,9 @@ def röstsystem():
                 time.sleep(6)
                 print("Och din motståndare får de flesta rösterna! Han blir utröstad och blir bort buad från arenan.")
 
+    input("")
+
+sound_6 = playsound("C:/Gladiatorerna/Fight.mp3", block=False)
 #Här är den allra första fighten, därför är det en annorlunda text, man möter inte en stor drake eller tiger sin första match, och kejsaren är inte närvarande för att man är okänd.
 print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
 print("Du går in i mäktiga Coloseum för första gången, och publiken iaktar dig misstänksamt, de känner inte igen dig.\nKejsaren är inte närvarande, och framför dig så ser du din första fiende, en Gladiator.")
@@ -1178,8 +1181,8 @@ while spelare_hälsopoäng > 0 and fiende_hälsopoäng > 0:    #anpassad första
     print("Du har " + Fore.GREEN + str(spelare_hälsopoäng) + Fore.RESET + " hälsopoäng kvar, och din motståndare har " + Fore.RED +  str(fiende_hälsopoäng) + Fore.RESET + " hälsopoäng kvar.")
     print(f"Du har {omtyckt} omtyckthetspoäng hos publiken.")
                 
-    print("Vad använder du för attack?\n(1)" + Fore.YELLOW + "Kvickt slag " + Fore.RESET + "(" + Fore.RED + str(vapen_skada) + Fore.RESET + ")")
-    attack_val = input("(1)")
+    print("Vad använder du för attack?\n(1)" + Fore.YELLOW + "Kvickt slag " + Fore.RESET + "(Skada (" + Fore.RED + str(vapen_skada) + Fore.RESET + "))")
+    attack_val = input(":")
     if attack_val == "1":
         slag = random.randint(1, 10)
         if slag != 1 or slag != 3 or slag != 5 or slag != 10:
@@ -1194,6 +1197,9 @@ while spelare_hälsopoäng > 0 and fiende_hälsopoäng > 0:    #anpassad första
             print("Du missar din fiende.")
     else:
         print("Du stod kvar, defensivt och stabilt.")
+    
+    if fiende_hälsopoäng < 1:
+        break
 
     print("Din fiende förbereder sig för att anfalla dig...")
     ai()
@@ -1207,7 +1213,7 @@ while spelare_hälsopoäng > 0 and fiende_hälsopoäng > 0:    #anpassad första
         röstsystem()
 
     clear_screen()
-
+sound_6.stop()
 romdaler += 20
 print("Du var så bra så du får ett kortsvärd av publiken!")
 vapen_attack = "Kortsvärd"         
@@ -1216,7 +1222,8 @@ vapen = "ett kortsvärd"
 time.sleep(5)
 #Här är själva fightfunktionen som den spelas om och om igen tills spelaren dör.
 def fight():
-    global träffar, fiende_hälsopoäng, runda, fiende, kejsaren, kejsaren_närvarande, gladiatorns_vapen, gladiatorns_vapen_för_striden, omtyckt, fiende_omtyckthet, is_player_alive, spelare_hälsopoäng, tiger_skada, drake_skada, vapen_skada
+    global träffar, fiende_hälsopoäng, runda, fiende, kejsaren, kejsaren_närvarande, gladiatorns_vapen, gladiatorns_vapen_för_striden, omtyckt, fiende_omtyckthet, is_player_alive, spelare_hälsopoäng, tiger_skada, drake_skada, vapen_skada, sound_6, fienden
+    sound_6 = playsound("C:/Gladiatorerna/Fight.mp3", block=False)
     if svårighet == (1):
         spelare_hälsopoäng = 20
         fiende_hälsopoäng = 10
@@ -1234,12 +1241,22 @@ def fight():
         omtyckt = 0
 
     elif svårighet == (3):
-        spelare_hälsopoäng = 10
+        spelare_hälsopoäng = 10 
         fiende_hälsopoäng = 10
         vapen_skada = 1
         tiger_skada = 4
         drake_skada = 5
         omtyckt = 1
+
+
+    if vapen_attack == "Kortsvärd":
+        vapen_träffchans = "(Träffchans(6/10))"
+    elif vapen_attack == "Yxor":
+        vapen_träffchans = "(Träffchans(5/10))"
+    elif vapen_attack == "Kroksabel":
+        vapen_träffchans = "(Träffchans(4/10))"
+    elif vapen_attack == "Spjut":
+        vapen_träffchans = "(Träffchans(2/10))"
 
     print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
     fienden = random.choice(fiende)
@@ -1253,7 +1270,7 @@ def fight():
         print(f"Du går in i mäktiga Colosseum, publiken jublar och hejar fram dig. Framför dig så står en {fienden}!\nKejsaren är {kejsaren} Du och din motståndare är redo att slåss.")
     omtyckt = 0
     fiende_omtyckthet = 0
-    runda = 0
+    runda = 1
     print(Fore.RESET + Style.BRIGHT + "==============================================================================================================================="+ Fore.RESET + Style.RESET_ALL)
     while spelare_hälsopoäng > 0 and fiende_hälsopoäng > 0:
         träffar = False
@@ -1261,9 +1278,10 @@ def fight():
         print("Du har " + Fore.GREEN + str(spelare_hälsopoäng) + Fore.RESET + " hälsopoäng kvar, och din motståndare har " + Fore.RED +  str(fiende_hälsopoäng) + Fore.RESET + " hälsopoäng kvar.")
         print(f"Du har {omtyckt} omtyckthetspoäng hos publiken.")
         
-        print("Vad använder du för attack?\n(1)" + Fore.YELLOW + "Kvickt slag " + Fore.RESET + "(" + Fore.RED + str(vapen_skada) + Fore.RESET + ")" + "(Träffchans(6/10)\n(2)" + Fore.YELLOW + str(vapen_attack) + Fore.RESET + " (" + Fore.RED + str(spelare_vapen) + Fore.RESET + ")" + str(vapen_träffchans))
-        print("(3)" + Fore.YELLOW + "Briljera" + Fore.RESET + " (Briljera dig med en 7/10 chans att lyckas)")
-        attack_val = input("(1) eller (2) eller (3):")
+        print("Vad använder du för attack?\n(1)" + Fore.YELLOW + "Kvickt slag " + Fore.RESET + "(Skada (" + Fore.RED + str(vapen_skada) + Fore.RESET + "))" + "(Träffchans(6/10)\n(2)" + Fore.YELLOW + str(vapen_attack) + Fore.RESET + " (Skada (" + Fore.RED + str(spelare_vapen) + Fore.RESET + "))" + str(vapen_träffchans))
+        print("(3)" + Fore.YELLOW + "Briljera" + Fore.RESET + " (Briljera dig med en 6/10 chans att lyckas)")
+        print("(4)" + Fore.YELLOW + "Ge upp" + Fore.RESET + "(Börjar röstningen direkt, högre chans för dig att åka ut)")
+        attack_val = input("(1) eller (2) eller (3) eller (4):")
         if attack_val == "1":
             slag = random.randint(1, 10)
             if slag != 1 or slag != 3 or slag != 5 or slag != 10:
@@ -1276,36 +1294,72 @@ def fight():
             else:
                 träffar = False
                 print("Du missar din fiende.")
+
+            print("Din fiende förbereder sig för att anfalla dig...")
+            ai()
         elif attack_val == "2":
             träff()
+            print("Din fiende förbereder sig för att anfalla dig...")
+            ai()
         elif attack_val == "3":
             briljera = 0
             briljera = random.randint(1, 10)
-            if briljera != 1 or briljera != 3 or briljera != 5:
+            if briljera != 1 or briljera != 3 or briljera != 5 or briljera !=7:
                 omtyckt += random.randint(1, 3)
                 print("Du börjar svinga runt ditt vapen och publiken jublar, din motståndare känner sig extremt hotad.")
-            else:
+            elif briljera == 2 or briljera == 4 or briljera == 6 or briljera == 8 or briljera == 9 or briljera == 10:
                 print("Du tappar ditt vapen under din uppvisning och arenan blir tyst.")
                 print("Din motståndare skäms för dig och ger dig tillbaka ditt vapen...")
                 omtyckt -= random.randint(1, 3)
+
+            print("Din fiende förbereder sig för att anfalla dig...")
+            ai()
+        elif attack_val == "4":
+            runda = 20
+            if svårighet == 1:
+                omtyckt -= 10
+            elif svårighet == 2:
+                omtyckt -= 15
+            elif svårighet == 3:
+                omtyckt -= 20
         else:
             print("Du stod kvar, defensivt och stabilt.")
         
-        print("Din fiende förbereder sig för att anfalla dig...")
-        ai()
+            print("Din fiende förbereder sig för att anfalla dig...")
+            ai()
 
         draken_kommer = random.randint(1,100)
-        if draken_kommer < 5:
-            ...
+        if draken_kommer < 5 and fienden != "Drake":
+            fienden = "Drake"
+            clear_screen()
+            print("Plötsligt under er fight så känner ni vinden avta i fart, och hör vingar fladdra!")
+            print("Människor ute i staden skriker efter hjälp, och sedan ser du det...")
+            input("")
+            print("En Drake!!!")
+            clear_screen()
+            print("Draken landar i mitten av arenan och äter hastigt upp din fiende, och får sina ögon på dig.")
+            print("Du måste slåss för ditt liv...")
+            fiende_hälsopoäng = 30
+            if svårighet == (1):
+                spelare_hälsopoäng = 20
+            elif svårighet == (2):
+                spelare_hälsopoäng = 15
+            elif svårighet == (3):
+                spelare_hälsopoäng = 10 
 
         input("")
         if spelare_hälsopoäng < 1:
             is_player_alive = False
+            print("Du dog på första nivån...")
+            print("Fighting är inte gjort för alla...")
+            print("(Starta om spelet)")
         runda += 1
-        if runda > 20:
+        if runda > 19:
             röstsystem()
+            break
 
         clear_screen()
+    sound_6.stop()
 
 affären()
 
@@ -1326,7 +1380,7 @@ while is_player_alive == True:
     if svårighet == (1) and vunna_fighter == 5:
         print("Du hindras av kejsaren när du ska gå in i affären, och du får reda på att han har\nobserverat dig under en längre tid nu,")
         print("och han vill släppa dig fri, som tack för det mod och den underhållning du bjudit på.")
-        time.sleep(15)
+        input("")
         print("Han ger dig dock ett val att du kan fortsätta vara en gladiator till dina sista dagar, med en lyxvilla med alla bekvämligheter du kan tänka\ndig.")
         print("Eller så kan du lämna och leva ett fritt liv precis så som du vill.")
         sista_val = input("Vad väljer du? (Stanna) eller (Lämna)").lower()
@@ -1338,7 +1392,7 @@ while is_player_alive == True:
     elif svårighet == (2) and vunna_fighter == 10:
         print("Du hindras av kejsaren när du ska gå in i affären, och du får reda på att han har\nobserverat dig under en längre tid nu,")
         print("och han vill släppa dig fri, som tack för det mod och den underhållning du bjudit på.")
-        time.sleep(15)
+        input("")
         print("Han ger dig dock ett val att du kan fortsätta vara en gladiator till dina sista dagar, med en lyxvilla med alla bekvämligheter du kan tänka\ndig.")
         print("Eller så kan du lämna och leva ett fritt liv precis så som du vill.")
         sista_val = input("Vad väljer du? (Stanna) eller (Lämna)").lower()
@@ -1350,7 +1404,7 @@ while is_player_alive == True:
     elif svårighet == (3) and vunna_fighter == 15:
         print("Du hindras av kejsaren när du ska gå in i affären, och du får reda på att han har\nobserverat dig under en längre tid nu,")
         print("och han vill släppa dig fri, som tack för det mod och den underhållning du bjudit på.")
-        time.sleep(15)
+        input("")
         print("Han ger dig dock ett val att du kan fortsätta vara en gladiator till dina sista dagar, med en lyxvilla med alla bekvämligheter du kan tänka\ndig.")
         print("Eller så kan du lämna och leva ett fritt liv precis så som du vill.")
         sista_val = input("Vad väljer du? (Stanna) eller (Lämna)").lower()
