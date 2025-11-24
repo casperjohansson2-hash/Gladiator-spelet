@@ -130,11 +130,11 @@ while menu_choice != ("5"):
             print("Välj en av följande gladiatorer:")
             print("1. Bobius Bobiusson\nEn vildman i 20 års åldern, tagen som slav från den nordesta toppen av romarriket, är fylld av hat och ilska,\n" \
             "redo att ta ut den på alla som kommer i hans väg...")
-            print("Egenskaper:\n" + Fore.GREEN + "+ Är skicklig med yxor\n+ Går in i berserkagång ibland och gör mer skada\n" + Fore.RED + "- Kan i sin berserkagång råka skada sig själv\n\n" + Fore.RESET)
+            print("Egenskaper:\n" + Fore.GREEN + "+ Är skicklig med yxor\n" + Fore.RESET)
 
             print("2. Maximus Decimus Meridius\nEn äldre romersk general som blivit förråd och fått sin familj mördad. " \
             "Han är redo att ge igen mot allt och alla som förstört honom.")
-            print("Egenskaper:\n" + Fore.GREEN + "+ Är skicklig med kortsvärd\n+ Ger ibland iväg ett vrål, som sänker fiendens moral, som sänker deras träffchans\n" + Fore.RED + "- På grund av sin ålder, är långsammare och gör mindre skada.\n\n" + Fore.RESET)
+            print("Egenskaper:\n" + Fore.GREEN + "+ Är skicklig med kortsvärd\n" + Fore.RESET)
 
             print("3. Egen\n Inga fördelar eller nackdelar")
             gladiator = input("Välj din gladiator(1, 2 eller 3)")
@@ -160,10 +160,10 @@ while menu_choice != ("5"):
                 gladiator = (3)
         elif kön_val == "kvinna":
             print("1. Berlinda Bobsson\nEn soldatkvinna från söder, tagen som slav är farlig med kroksablar, och förbluffar fiender med hennes snabbhet.\nHon är fast besluten att ta sig hem till södern.")
-            print("Egenskaper:\n" + Fore.GREEN + "+ Är skicklig med kroksablar\n+ Är väldigt snabb, har ökad träffchans\n" + Fore.RED + "- Gör mindre skada på grund av gammal skada\n\n" + Fore.RESET)
+            print("Egenskaper:\n" + Fore.GREEN + "+ Är skicklig med kroksablar\n" + Fore.RESET)
 
             print("2. Emilia Neosdotter\nEn tjuv som tillslut tagits efter flera år av stölder och terrorisering.\nEmilia är väldigt gymnastisk och farlig på grund av hennes kunnighet inom stridskonst.")
-            print("Egenskaper:\n" + Fore.GREEN + "+ Är skickligast utan vapen\n+ Är väldigt kvick, och är svårare att träffa\n" + Fore.RED + "- Gör mindre skada på grund av svaghet\n\n" + Fore.RESET)
+            print("Egenskaper:\n" + Fore.GREEN + "+ Är skickligast utan vapen\n" + Fore.RESET)
             
             print("3. Egen\n Inga fördelar eller nackdelar")
             gladiator = input("Välj din gladiator(1, 2 eller 3)")
